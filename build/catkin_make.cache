@@ -1,0 +1,2 @@
+weed_bot_description:weed_bot_launch:weed_bot_worlds:your_package_name
+-DCATKIN_DEVEL_PREFIX=/home/weed_bot/devel -DCMAKE_INSTALL_PREFIX=/home/weed_bot/install -G Unix Makefiles

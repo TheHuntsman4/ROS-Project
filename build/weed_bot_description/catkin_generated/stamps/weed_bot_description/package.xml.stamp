@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>weed_bot_description</name>
+  <version>0.0.1</version>
+  <description>URDF and description files for weed bot</description>
+  <maintainer email="you@example.com">Your Name</maintainer>
+  <license>MIT</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <export></export>
+</package>

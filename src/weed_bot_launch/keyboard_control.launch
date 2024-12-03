@@ -1,0 +1,37 @@
+<launch>
+  <!-- Define the use_vnc and world_name arguments -->
+  <arg name="use_vnc" default="false" />
+  <arg name="world_name" default="/home/weed_bot/src/weed_bot_worlds/simple_world.world" />
+
+  <!-- Load Robot Description -->
+  <param name="robot_description" command="$(find xacro)/xacro $(find weed_bot_description)/urdf/simple_rover.urdf.xacro" />
+
+  <!-- Start Gazebo with custom world -->
+  <node name="gazebo" pkg="gazebo_ros" type="gzserver" args="-s libgazebo_ros_factory.so -world $(arg world_name)" output="screen" />
+  <node name="gazebo_gui" pkg="gazebo_ros" type="gzclient" args="-world $(arg world_name)" output="screen" />
+
+  <!-- Spawn the Robot -->
+  <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model weed_bot" />
+
+  <!-- Load ros_control controllers -->
+  <rosparam file="/home/weed_bot/src/weed_bot_control/controllers.yaml" />
+
+  <!-- Spawn joint_state_controller -->
+  <node name="controller_spawner_joint_state" pkg="controller_manager" type="spawner" args="joint_state_controller" />
+
+  <!-- Spawn diff_drive_controller -->
+  <node name="controller_spawner_diff_drive" pkg="controller_manager" type="spawner" args="diff_drive_controller" />
+
+  <!-- Teleop Twist Keyboard -->
+  <node name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen" />
+
+  <!-- Camera View -->
+  <node name="camera_view" pkg="image_view" type="image_view" args="image:=/camera/image_raw" />
+
+  <!-- VNC Start Node (only if use_vnc is true) -->
+  <group if="$(arg use_vnc)">
+    <node name="vnc_server" pkg="vnc" type="vnc_server_node" output="screen">
+      <!-- Include any VNC-specific parameters or configurations here -->
+    </node>
+  </group>
+</launch>

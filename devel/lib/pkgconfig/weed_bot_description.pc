@@ -1,0 +1,8 @@
+prefix=/home/weed_bot/devel
+
+Name: weed_bot_description
+Description: Description of weed_bot_description
+Version: 0.0.1
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

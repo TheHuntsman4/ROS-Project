@@ -1,0 +1,8 @@
+prefix=/home/weed_bot/install
+
+Name: weed_bot_worlds
+Description: Description of weed_bot_worlds
+Version: 0.0.1
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
